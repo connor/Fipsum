@@ -1,6 +1,6 @@
 # Fipsum
 
-Welcome to Fipsum! It's worth nothing that the [original Fipsum](http://fipsum.com/) was developed by [Dustin Senos](https://github.com/dustinsenos).
+Welcome to Fipsum! It's worth nothing that the [original Fipsum](http://fipsum.com/) (for Safari) was developed by [Dustin Senos](https://github.com/dustinsenos). All I did was port it over to Chrome.
 
 
 ### About Fipsum
