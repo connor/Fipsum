@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Fipsum Test</title>
+        <style type="text/css">
+            html,
+            body {
+                font-size: 16px;
+                font-family: sans-serif;
+            }
+            table {
+                border: 1px solid #CCC;
+                min-width: 750px;
+            }
+            table th {
+                text-align: left;
+                padding: 0.5em;
+            }
+            table td.type {
+                background: #EFEFEF;
+                padding: 0.5em;
+                width: 260px;
+                text-align: right;
+            }
+            table input {
+                width: 100%;
+                padding: 0.25em;
+                box-sizing: border-box;
+            }
+        </style>
+    </head>
+    <body>
+        <table>
+            <thead>
+                <tr>
+                    <th class="type">Type</th>
+                    <th class="input">Input</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="type">
+                        Text
+                    </td>
+                    <td class="input">
+                        <input type="text" />
+                    </td>
+                </tr>
+                <tr>
+                    <td class="type">
+                        URL
+                    </td>
+                    <td class="input">
+                        <input type="url" />
+                    </td>
+                </tr>
+                <tr>
+                    <td class="type">
+                        Email
+                    </td>
+                    <td class="input">
+                        <input type="email" />
+                    </td>
+                </tr>
+                <tr>
+                    <td class="type">
+                        Date
+                    </td>
+                    <td class="input">
+                        <input type="date" />
+                    </td>
+                </tr>
+                <tr>
+                    <td class="type">
+                        Time
+                    </td>
+                    <td class="input">
+                        <input type="time" />
+                    </td>
+                </tr>
+                <tr>
+                    <td class="type">
+                        Datetime
+                    </td>
+                    <td class="input">
+                        <input type="datetime-local" id="datetime-local " />
+                    </td>
+                </tr>
+                <tr>
+                    <td class="type">
+                        Month
+                    </td>
+                    <td class="input">
+                        <input type="month" />
+                    </td>
+                </tr>
+                <tr>
+                    <td class="type">
+                        Week
+                    </td>
+                    <td class="input">
+                        <input type="week" />
+                    </td>
+                </tr>
+                <tr>
+                    <td class="type">
+                        Number
+                    </td>
+                    <td class="input">
+                        <input type="number" />
+                    </td>
+                </tr>
+                <tr>
+                    <td class="type">
+                        Range
+                    </td>
+                    <td class="input">
+                        <input type="range" min="0" max="100" />
+                    </td>
+                </tr>
+                <tr>
+                    <td class="type">
+                        Tel
+                    </td>
+                    <td class="input">
+                        <input type="tel" />
+                    </td>
+                </tr>
+                <tr>
+                    <td class="type">
+                        Color
+                    </td>
+                    <td class="input">
+                        <input type="color" />
+                    </td>
+                </tr>
+                <tr>
+                    <td class="type">
+                        Checkbox
+                    </td>
+                    <td class="input">
+                        <input type="checkbox" name="checkbox1" value="1" />
+                        <input type="checkbox" name="checkbox2" value="2" />
+                        <input type="checkbox" name="checkbox3" value="3" />
+                    </td>
+                </tr>
+                <tr>
+                    <td class="type">
+                        Radio
+                    </td>
+                    <td class="input">
+                        <input type="radio" name="radio" value="1" />
+                        <input type="radio" name="radio" value="2" />
+                        <input type="radio" name="radio" value="3" />
+                    </td>
+                </tr>
+                <tr>
+                    <td class="type">
+                        Textarea
+                    </td>
+                    <td class="input">
+                        <textarea></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="type">
+                        Hidden
+                    </td>
+                    <td class="input">
+                        <input type="hidden" id="hidden-input" value="This is a hidden element and should remain unaffected" />
+                        Value: <span id="hidden-val"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="type">
+                        Text (parent hidden with CSS)
+                    </td>
+                    <td class="input">
+                        <div style="display:none">
+                            <input type="text" id="parent-hidden-css-input" value="This is a hidden element and should remain unaffected" />
+                        </div>
+                        Value: <span id="parent-hidden-css-val"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="type">
+                        Textarea (parent hidden with CSS)
+                    </td>
+                    <td class="input">
+                        <div style="display:none">
+                            <textarea id="parent-hidden-textarea-input">This is a hidden element and should remain unaffected</textarea>
+                        </div>
+                        Value: <span id="parent-hidden-textarea-val"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="type">
+                        Text (hidden with CSS)
+                    </td>
+                    <td class="input">
+                        <input style="display:none" type="text" id="hidden-css-input" value="This is a hidden element and should remain unaffected" />
+                        Value: <span id="hidden-css-val"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="type">
+                        Textarea (hidden with CSS)
+                    </td>
+                    <td class="input">
+                        <textarea style="display:none" id="hidden-textarea-input">This is a hidden element and should remain unaffected</textarea>
+                        Value: <span id="hidden-textarea-val"></span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <script type="text/javascript">
+
+            setInterval(function() {
+
+                var input, target;
+
+                input = document.getElementById('hidden-input');
+                target = document.getElementById('hidden-val');
+                target.innerHTML = input.value;
+
+                input = document.getElementById('parent-hidden-css-input');
+                target = document.getElementById('parent-hidden-css-val');
+                target.innerHTML = input.value;
+
+                input = document.getElementById('hidden-css-input');
+                target = document.getElementById('hidden-css-val');
+                target.innerHTML = input.value;
+
+                input = document.getElementById('parent-hidden-textarea-input');
+                target = document.getElementById('parent-hidden-textarea-val');
+                target.innerHTML = input.value;
+
+                input = document.getElementById('hidden-textarea-input');
+                target = document.getElementById('hidden-textarea-val');
+                target.innerHTML = input.value;
+
+            }, 100);
+
+        </script>
+    </body>
+</html>

@@ -1,101 +1,111 @@
 function fipsum() {
 
-	var els 			= document.querySelectorAll('input');
-	var textareas = document.querySelectorAll('textarea');
-	var length 		= els.length
-		, ta_length = textareas.length
-		, i 				= 0;
+	var els,textarea,length,ta_length,i;
+
+	els 		= document.querySelectorAll('input');
+	textareas   = document.querySelectorAll('textarea');
+	length 		= els.length;
+	ta_length 	= textareas.length;
+	i 			= 0;
 
 	for ( i; i < length; i ++ ) {
-		switch ( els[i].type ) {
-			case 'submit' :
-				break;
 
-			case 'text' :
-				els[i].value = getRandomStringWithSpaces(1, 4);
-				break;
+		if (els[i].isVisible(els[i])) {
+			switch ( els[i].type ) {
+				case 'submit' :
+				case 'hidden' :
+					break;
 
-			case 'url' :
-				els[i].value = ('http://' + getRandomStringWithNoSpaces(1, 4) + '.com');
-				break;
+				case 'text' :
+					els[i].value = getRandomStringWithSpaces(1, 4);
+					break;
 
-			case 'email' :
-				els[i].value = (getRandomStringWithNoSpaces(1, 2) + '@' + getRandomStringWithNoSpaces(1, 4) + '.com');
-				break;
+				case 'url' :
+					els[i].value = ('http://' + getRandomStringWithNoSpaces(1, 4) + '.com');
+					break;
 
-			case 'date' :
-				els[i].value = getRandomDate();
-				break;
+				case 'email' :
+					els[i].value = (getRandomStringWithNoSpaces(1, 2) + '@' + getRandomStringWithNoSpaces(1, 4) + '.com');
+					break;
 
-			case 'time' :
-				els[i].value = getRandomTime();
-				break;
+				case 'date' :
+					els[i].value = getRandomDate();
+					break;
 
-			case 'datetime' :
-				els[i].value = getRandomDate() + ' ' + getRandomTime();
-				break;
+				case 'time' :
+					els[i].value = getRandomTime();
+					break;
 
-			case 'month' :
-				els[i].value = getRandomMonthYear();
-				break;
+				case 'datetime' :
+				case 'datetime-local' :
+					els[i].value = getRandomDate() + 'T' + getRandomTime();
+					break;
 
-			case 'week' :
-				els[i].value = getRandomWeek();
-				break;
+				case 'month' :
+					els[i].value = getRandomMonthYear();
+					break;
 
-			case 'number' :
-			case 'range' :
+				case 'week' :
+					els[i].value = getRandomWeek();
+					break;
 
-				if (els[i].max) {
-					var max = els[i].max;
-				}
-				else {
-					var max = randomFromTo(0, 1000);
-				}
+				case 'number' :
+				case 'range' :
 
-				if (els[i].min) {
-					var min = els[i].min;
-				}
-				else {
-					var min = randomFromTo(0, 1000);
-				}
+					var max,min,value;
+					if (els[i].max) {
+						max = els[i].max;
+					}
+					else {
+						max = randomFromTo(0, 1000);
+					}
 
-				var value = randomFromTo(min, max);
+					if (els[i].min) {
+						min = els[i].min;
+					}
+					else {
+						min = randomFromTo(0, 1000);
+					}
 
-				if (els[i].step) {
-					value -= (value % els[i].step);
-				}
+					value = randomFromTo(min, max);
 
-				els[i].value = value;
-				break;
+					if (els[i].step) {
+						value -= (value % els[i].step);
+					}
 
-			case 'tel' :
-				els[i].value = getRandomTel();
-				break;
+					els[i].value = value;
+					break;
 
-			case 'color' :
-				els[i].value = getRandomColor();
-				break;
+				case 'tel' :
+					els[i].value = getRandomTel();
+					break;
 
-			case 'checkbox' :
+				case 'color' :
+					els[i].value = getRandomColor();
+					break;
+
+				case 'checkbox' :
 				case 'radio' :
-					if (Math.random() < .5) {
+					if (Math.random() < 0.5) {
 						els[i].checked = true;
 					}
 					break;
 
-			case 'textarea' :
-				els[i].value = getRandomParagraphWithSpaces(1, 4);
-				break;
+				case 'textarea' :
+					els[i].value = getRandomParagraphWithSpaces(1, 4);
+					break;
 
-			default :
-				els[i].value = getRandomStringWithSpaces(1, 4);
-				break;
+				default :
+					els[i].value = getRandomStringWithSpaces(1, 4);
+					break;
+			}
 		}
-	};
+	}
 
 	for ( var t = 0; t < ta_length; t++ ) {
-		textareas[t].value = getRandomParagraphWithSpaces(10, 20)
+		if (textareas[t].isVisible(textareas[t])) {
+			textareas[t].value = getRandomParagraphWithSpaces(10, 20);
+		}
 	}
 
 }
@@ -147,7 +157,7 @@ function getRandomDate() {
 }
 
 function getRandomTime() {
-	return randomFromTo(1, 12) + ':' + zeroPad(randomFromTo(1, 59), 2) + ':' + zeroPad(randomFromTo(1, 59), 2);
+	return zeroPad(randomFromTo(0, 23), 2) + ':' + zeroPad(randomFromTo(1, 59), 2) + ':' + zeroPad(randomFromTo(1, 59), 2);
 }
 
 function getRandomMonthYear() {
@@ -180,7 +190,6 @@ var pseudoSentences = Array('Morbi leo risus, porta ac consectetur ac, vestibulu
 function randomFromTo(from, to) {
 	return Math.floor( Math.random() * (to - from + 1) + from );
 }
-
 
 // initialize the context menu
 chrome.contextMenus.create({
