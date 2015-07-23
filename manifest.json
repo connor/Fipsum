@@ -1,6 +1,6 @@
 {
    "background": {
-      "page": "global.html"
+      "scripts": ["background.js"]
    },
    "content_scripts": [ {
       "js": [ "visibility.js", "fipsum.js" ],

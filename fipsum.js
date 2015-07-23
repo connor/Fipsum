@@ -3,10 +3,12 @@ function fipsum() {
 	var els,textarea,length,ta_length,i;
 
 	els 		= document.querySelectorAll('input');
-	textareas   = document.querySelectorAll('textarea');
-	length 		= els.length;
-	ta_length 	= textareas.length;
-	i 			= 0;
+	textareas	= document.querySelectorAll('textarea');
+	selects		= document.querySelectorAll('select');
+	length		= els.length;
+	ta_length	= textareas.length;
+	sel_length	= selects.length;
+	i			= 0;
 
 	for ( i; i < length; i ++ ) {
 
@@ -108,6 +110,27 @@ function fipsum() {
 		}
 	}
 
+	for ( var s = 0; s < sel_length; s++ ) {
+		if (selects[s].isVisible(selects[s])) {
+
+			var isMultiple = selects[s].multiple;
+			var children = selects[s].getElementsByTagName('option');
+
+			//	Clear selections, randomly check them again
+			for (var c = children.length - 1; c >= 0; c--) {
+				children[c].selected = false;
+			}
+
+			for (var c = children.length - 1; c >= 0; c--) {
+				if (Math.random() < 0.5 && children[c].value != "") {
+					children[c].selected = true;
+					if (!isMultiple) {
+						break;
+					}
+				}
+			}
+		}
+	}
 }
 
 function getRandomParagraphWithSpaces(min, max) {
@@ -153,7 +176,7 @@ function getRandomStringWithNoSpaces(min, max) {
 }
 
 function getRandomDate() {
-	return  getRandomMonthYear() + '-' + zeroPad(randomFromTo(1, 29), 2);
+	return  getRandomMonthYear() + '-' + zeroPad(randomFromTo(1, 28), 2);
 }
 
 function getRandomTime() {
@@ -190,15 +213,3 @@ var pseudoSentences = Array('Morbi leo risus, porta ac consectetur ac, vestibulu
 function randomFromTo(from, to) {
 	return Math.floor( Math.random() * (to - from + 1) + from );
 }
-
-// initialize the context menu
-chrome.contextMenus.create({
-  "title": "Fipsum",
-  "contexts": ["page"],
-  "type" : "normal",
-  "onclick" : function(info, tab) {
-  	chrome.tabs.executeScript(null, {
-  		code:"fipsum()"
-  	});
-  }
-});
