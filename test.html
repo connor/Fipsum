@@ -22,14 +22,32 @@
                 width: 260px;
                 text-align: right;
             }
-            table input {
+            table input,
+            table textarea,
+            table select {
                 width: 100%;
                 padding: 0.25em;
                 box-sizing: border-box;
             }
+            table textarea,
+            table select[multiple="multiple"] {
+                height: 100px;
+            }
+            hr {
+                border: none;
+                border-top: 1px solid #CCC;
+                margin: 2em 0;
+            }
         </style>
     </head>
     <body>
+        <h1>
+            Fipsum Test Page
+        </h1>
+        <button onclick="javascript:fipsum();">
+            Fipsum-ize!
+        </button>
+        <hr />
         <table>
             <thead>
                 <tr>
@@ -164,6 +182,36 @@
                 </tr>
                 <tr>
                     <td class="type">
+                        Select
+                    </td>
+                    <td class="input">
+                        <select id="select">
+                            <option value="">Please Select...</option>
+                            <option value="1">Option 1</option>
+                            <option value="2">Option 2</option>
+                            <option value="3">Option 3</option>
+                            <option value="4">Option 4</option>
+                            <option value="5">Option 5</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="type">
+                        Select Multiple
+                    </td>
+                    <td class="input">
+                        <select multiple="multiple">
+                            <option value="">Please Select...</option>
+                            <option value="1">Option 1</option>
+                            <option value="2">Option 2</option>
+                            <option value="3">Option 3</option>
+                            <option value="4">Option 4</option>
+                            <option value="5">Option 5</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="type">
                         Hidden
                     </td>
                     <td class="input">
@@ -213,6 +261,8 @@
                 </tr>
             </tbody>
         </table>
+        <script type="text/javascript" src="visibility.js"></script>
+        <script type="text/javascript" src="fipsum.js"></script>
         <script type="text/javascript">
 
             setInterval(function() {
