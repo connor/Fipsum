@@ -19,36 +19,36 @@ function fipsum() {
 					break;
 
 				case 'text' :
-					els[i].value = getRandomStringWithSpaces(1, 4);
+					setValue(els[i], getRandomStringWithSpaces(1, 4));
 					break;
 
 				case 'url' :
-					els[i].value = ('http://' + getRandomStringWithNoSpaces(1, 4) + '.com');
+					setValue(els[i], ('http://' + getRandomStringWithNoSpaces(1, 4) + '.com'));
 					break;
 
 				case 'email' :
-					els[i].value = (getRandomStringWithNoSpaces(1, 2) + '@' + getRandomStringWithNoSpaces(1, 4) + '.com');
+					setValue(els[i], (getRandomStringWithNoSpaces(1, 2) + '@' + getRandomStringWithNoSpaces(1, 4) + '.com'));
 					break;
 
 				case 'date' :
-					els[i].value = getRandomDate();
+					setValue(els[i], getRandomDate());
 					break;
 
 				case 'time' :
-					els[i].value = getRandomTime();
+					setValue(els[i], getRandomTime());
 					break;
 
 				case 'datetime' :
 				case 'datetime-local' :
-					els[i].value = getRandomDate() + 'T' + getRandomTime();
+					setValue(els[i], getRandomDate() + 'T' + getRandomTime());
 					break;
 
 				case 'month' :
-					els[i].value = getRandomMonthYear();
+					setValue(els[i], getRandomMonthYear());
 					break;
 
 				case 'week' :
-					els[i].value = getRandomWeek();
+					setValue(els[i], getRandomWeek());
 					break;
 
 				case 'number' :
@@ -75,15 +75,15 @@ function fipsum() {
 						value -= (value % els[i].step);
 					}
 
-					els[i].value = value;
+					setValue(els[i], value);
 					break;
 
 				case 'tel' :
-					els[i].value = getRandomTel();
+					setValue(els[i], getRandomTel());
 					break;
 
 				case 'color' :
-					els[i].value = getRandomColor();
+					setValue(els[i], getRandomColor());
 					break;
 
 				case 'checkbox' :
@@ -93,12 +93,8 @@ function fipsum() {
 					}
 					break;
 
-				case 'textarea' :
-					els[i].value = getRandomParagraphWithSpaces(1, 4);
-					break;
-
 				default :
-					els[i].value = getRandomStringWithSpaces(1, 4);
+					setValue(els[i], getRandomStringWithSpaces(1, 4));
 					break;
 			}
 		}
@@ -106,7 +102,7 @@ function fipsum() {
 
 	for ( var t = 0; t < ta_length; t++ ) {
 		if (textareas[t].isVisible(textareas[t])) {
-			textareas[t].value = getRandomParagraphWithSpaces(10, 20);
+			setValue(textareas[t], getRandomParagraphWithSpaces(10, 20));
 		}
 	}
 
@@ -130,6 +126,13 @@ function fipsum() {
 				}
 			}
 		}
+	}
+}
+
+function setValue(el, value)
+{
+	if (!el.value.length) {
+		el.value = value;
 	}
 }
 
